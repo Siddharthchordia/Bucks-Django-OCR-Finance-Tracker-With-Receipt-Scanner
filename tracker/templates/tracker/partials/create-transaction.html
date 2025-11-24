@@ -1,0 +1,37 @@
+{% load widget_tweaks %}
+
+<h1 class="pt-10 mb-2 prose prose-2xl font-semibold text-white">Create Transaction</h1>
+
+<form hx-post="{% url 'create-transaction' %}" hx-target="#transaction-block" hx-swap="innerHTML">
+    {% csrf_token %}
+
+    {% if error %}
+    <div class="alert alert-error bg-red-500 text-white p-2 mb-2 rounded">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="mb-4">
+        <label class="block text-white text-sm font-bold mb-2">Scan Receipt (Auto-fill)</label>
+        <input type="file" name="receipt_image" class="file-input file-input-bordered file-input-sm w-full max-w-xs"
+            hx-post="{% url 'scan-receipt' %}" hx-encoding="multipart/form-data" hx-target="#transaction-block"
+            hx-swap="innerHTML">
+    </div>
+
+    {% if scanned_image %}
+    <div class="mb-4">
+        <label class="block text-white text-sm font-bold mb-2">Scanned Receipt Preview</label>
+        <img src="{{ scanned_image }}" alt="Scanned Receipt" class="max-w-xs rounded shadow-lg border border-gray-600">
+    </div>
+    {% endif %}
+
+    {% include 'tracker/partials/transaction-form.html' %}
+
+    <button class="btn btn-success bg-green-600 mb-2 mt-2 px-2 py-1 text-sm">
+        Add
+    </button>
+    <button class="btn btn-success bg-gray-200 text-black mb-2 mt-2 px-2 py-1 text-sm"
+        hx-get="{% url 'transactions-list' %}" hx-push-url="true" hx-target="#transaction-block">
+        Cancel
+    </button>
+</form>

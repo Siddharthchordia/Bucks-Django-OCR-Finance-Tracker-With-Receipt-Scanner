@@ -1,0 +1,93 @@
+{% extends 'tracker/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<script>
+    window.CHART_WEEKLY_URL = "{% url 'api-chart-weekly' %}";
+    window.CHART_CATEGORIES_URL = "{% url 'api-chart-categories' %}";
+    window.CHART_MONTHLY_URL = "{% url 'api-chart-monthly' %}";
+</script>
+
+{#{% if has_expense_data %}#}
+<div class="chart-card">
+    <h2>Expenses by Category</h2>
+    <div class="chart-muted">Breakdown by Category</div>
+    <div class="chart-canvas-wrap mt-3">
+        <canvas id="categoryChart" height="240"></canvas>
+    </div>
+
+</div>
+{#{% endif %}#}
+
+{#{% if has_weekly_data %}#}
+<div class="chart-card">
+    <div class="flex items-center justify-between mb-2">
+        <div>
+            <h2>Weekly Income vs Expense</h2>
+            <div class="chart-muted" id="weekLabel">This Week</div>
+        </div>
+        <div class="flex gap-2">
+            <button id="weekPrev" class="nav-arrow-btn" title="Previous Week">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button id="weekNext" class="nav-arrow-btn" title="Next Week">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="chart-canvas-wrap mt-3">
+        <canvas id="weeklyChart" height="240"></canvas>
+        <div id="weeklyNoData" style="display: none;" class="no-data-message">
+            No Transactions in this week
+        </div>
+    </div>
+</div>
+{#{% endif %}#}
+
+{#{% if has_monthly_data %}#}
+<div class="chart-card">
+    <div class="flex items-center justify-between mb-2">
+        <div>
+            <h2>Monthly Income vs Expense</h2>
+            <div class="chart-muted" id="monthLabel">This Month</div>
+        </div>
+        <div class="flex gap-2">
+            <button id="monthPrev" class="nav-arrow-btn" title="Previous Month">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button id="monthNext" class="nav-arrow-btn" title="Next Month">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    <div class="chart-canvas-wrap mt-3">
+        <canvas id="monthlyChart" height="240"></canvas>
+    </div>
+</div>
+{#{% endif %}#}
+
+
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Your custom JS -->
+<script src="{% static 'js/charts.js' %}"></script>
+
+<!-- Chart Styles -->
+<link rel="stylesheet" href="{% static 'css/chart_styles.css' %}">
+
+{% endblock content %}

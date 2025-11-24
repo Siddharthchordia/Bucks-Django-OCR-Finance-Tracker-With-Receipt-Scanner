@@ -1,0 +1,20 @@
+{% load widget_tweaks %}
+
+<h1 class="mt-6 mb-2 prose prose-2xl text-white">Update Transaction</h1>
+{##}
+<form
+    hx-post="{% url 'update-transaction' transaction.pk %}"
+    hx-target="#transaction-block"
+    hx-swap="innerHTML"
+>
+    {% csrf_token %}
+
+    {% include 'tracker/partials/transaction-form.html' %}
+
+    <button class="btn btn-success bg-green-600 mb-2 mt-2 px-2 py-1 text-sm">
+        Update
+    </button>
+    <button class="btn btn-success bg-gray-200 text-black mb-2 mt-2 px-2 py-1 text-sm" hx-get="{% url 'transactions-list' %}" hx-push-url="true" hx-target="#transaction-block">
+        Cancel
+    </button>
+</form>
