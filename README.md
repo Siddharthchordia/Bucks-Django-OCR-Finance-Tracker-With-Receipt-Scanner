@@ -204,6 +204,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Siddharth Chordia - [@siddharthhchordia](https://instagram.com/yourtwitter)
+Siddharth Chordia - [@siddharthhchordia](https://instagram.com/siddharthhchordia)
 
 Project Link: [https://github.com/yourusername/Bucks](https://github.com/yourusername/Bucks)
